@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .post-content {
+        margin-top: 50px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-4" th:text="${reviews != null ? reviews.bookName : 'Book Name'}">Book Name</h1>
+    <p class="lead">
+        Genres:
+        <span th:each="genre : ${reviews.genre}" th:text="${genre} + ' '">Genre Name</span>
+    </p>
+    <hr>
+    <p>
+        Authors:
+        <span th:each="author : ${reviews.authorName}" th:text="${author} + ' '">Author Name</span>
+    </p>
+    <hr>
+
+    <h3>Reviews</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <div class=" media mt-4" th:each="user : ${reviews.users}" th:text="${user} + ' '">
+                <div class="media-body">
+                    <h5 class="mt-0" th:text="${user}">Reviewer Name</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class=" media mt-4" th:each="review : ${reviews.review}" th:text="${review} + ' '">
+                <div class="media-body">
+                    <p th:text="${review}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis consectetur
+                        metus vitae magna pretium gravida.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+<!--    <form th:action="@{/reviews}" method="post">-->
+<!--        <h4>Leave a Rating</h4>-->
+<!--        <div class="form-group">-->
+<!--            <label for="commenterName">Your Name</label>-->
+<!--            <input type="text" class="form-control" id="commenterName" name="username">-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <label for="commentContent">Your Comment</label>-->
+<!--            <textarea class="form-control" id="commentContent" rows="3" name="reviewText"></textarea>-->
+<!--        </div>-->
+<!--        <input type="hidden" name="bookId" th:value="${reviews != null ? reviews.bookId : ''}">-->
+<!--        <button type="submit" class="btn btn-primary">Submit</button>-->
+<!--    </form>-->
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

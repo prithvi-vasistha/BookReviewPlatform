@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Page</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div style="display:flex;justify-content:space-between;">
+        <h1>Books</h1>
+        <a style="padding:15px" class="btn btn-primary" href="/api/addbooks" role="button">Add Books</a>
+    </div>
+    <br/>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Author</th>
+            <th>Pages</th>
+            <th>Reviews</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${bookInfo}" th:attr="data-book-id=${book.bookId}" onclick="redirectToBookPage(this)">
+            <td th:text="${book.bookName}"></td>
+            <td>
+                <ul th:each="genre : ${book.genre}" th:text="${genre} + ' '"></ul>
+            </td>
+            <td>
+                <ul th:each="author : ${book.authorName}" th:text="${author} + ' '"></ul>
+            </td>
+            <td th:text="${book.pages}"></td>
+            <td>
+                <ul th:each="review : ${book.review}" th:text="${review} + ' '"></ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    function redirectToBookPage(row) {
+        var bookId = row.getAttribute("data-book-id");
+        window.location.href = "/api/reviews/" + bookId;
+    }
+</script>
+</body>
+</html>
